@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 
 
 // GET will be used probably with 
+
 // get :id to get info about the specific
+
 // restaurant the used desired to know
 // more info about.
 

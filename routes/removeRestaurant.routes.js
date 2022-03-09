@@ -7,8 +7,8 @@ const Restaurant = require("../model/Restaurant.model");
 
 
 // GET will be used to find info in the array
-// DELETE to delete the restaurante from favorites
 
+// DELETE to delete the restaurante from favorites
 
 
 
