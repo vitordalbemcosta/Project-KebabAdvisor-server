@@ -14,6 +14,12 @@ router.post('/restaurants', (req, res, next) => {
             res.json(createRestaurant);
         }).catch((err) => next(err));
 });
+router.get("/restaurants", (req, res, next) => {
+  Restaurant.find()
+    .then((response) => res.json(response))
+    .catch((err) => res.json(err));
+});
+
 router.get("/restaurants/:restaurantId", (req, res, next) => {
   const { restaurantId } = req.params;
 
@@ -27,6 +33,7 @@ router.get("/restaurants/:restaurantId", (req, res, next) => {
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
+
 
 router.put("/restaurants/:restaurantId", (req, res, next) => {
   const { restaurantId } = req.params;
