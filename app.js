@@ -18,32 +18,32 @@ require("./config")(app);
 // 👇 Start handling routes here
 // Contrary to the views version, all routes are controlled from the routes/index.js
 
-const allRoutes = require("./routes");
+const allRoutes = require("./routes/index.routes");
 app.use("/", allRoutes);
 
 const authRoutes = require("./routes/auth.routes");
-app.use("/", authRoutes);
+app.use("/auth", authRoutes);
 
-const addRestaurantRoutes = require("./routes/addRestaurant.routes");
+const addRestaurantRoutes = require("./routes/restaurant.routes");
 app.use("/", addRestaurantRoutes);
 
-const bestRatedRoutes = require("./routes/bestRated.routes");
-app.use("/", bestRatedRoutes);
+// const bestRatedRoutes = require("./routes/bestRated.routes");
+// app.use("/", bestRatedRoutes);
 
-const detailsRestaurantRoutes = require("./routes/detailsRestaurant.routes");
-app.use("/", detailsRestaurantRoutes);
+// const detailsRestaurantRoutes = require("./routes/detailsRestaurant.routes");
+// app.use("/", detailsRestaurantRoutes);
 
-const randomRestaurantRoutes = require("./routes/randomRestaurant.routes");
-app.use("/", randomRestaurantRoutes);
+// const randomRestaurantRoutes = require("./routes/randomRestaurant.routes");
+// app.use("/", randomRestaurantRoutes);
 
-const removeRestaurantRoutes = require("./routes/removeRestaurant.routes");
-app.use("/", removeRestaurantRoutes);
+// // const removeRestaurantRoutes = require("./routes/removeRestaurant.routes");
+// // app.use("/", removeRestaurantRoutes);
 
-const userProfileRoutes = require("./routes/userProfile.routes");
-app.use("/", userProfileRoutes);
+// const userProfileRoutes = require("./routes/userProfile.routes");
+// app.use("/", userProfileRoutes);
 
-const userReviewsRoutes = require("./routes/userReviews.routes");
-app.use("/", userReviewsRoutes);
+// const userReviewsRoutes = require("./routes/userReviews.routes");
+// app.use("/", userReviewsRoutes);
 
 
 
