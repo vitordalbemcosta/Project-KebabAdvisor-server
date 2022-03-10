@@ -15,6 +15,9 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
+const { isAuthenticated } = require("./middleware/jwt.middleware");
+
+
 // 👇 Start handling routes here
 // Contrary to the views version, all routes are controlled from the routes/index.js
 
@@ -24,27 +27,11 @@ app.use("/", allRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
-const addRestaurantRoutes = require("./routes/restaurant.routes");
-app.use("/", addRestaurantRoutes);
+const restaurantRoutes = require("./routes/restaurant.routes");
+app.use("/", isAuthenticated,  restaurantRoutes);
 
-// const bestRatedRoutes = require("./routes/bestRated.routes");
-// app.use("/", bestRatedRoutes);
-
-// const detailsRestaurantRoutes = require("./routes/detailsRestaurant.routes");
-// app.use("/", detailsRestaurantRoutes);
-
-// const randomRestaurantRoutes = require("./routes/randomRestaurant.routes");
-// app.use("/", randomRestaurantRoutes);
-
-// // const removeRestaurantRoutes = require("./routes/removeRestaurant.routes");
-// // app.use("/", removeRestaurantRoutes);
-
-// const userProfileRoutes = require("./routes/userProfile.routes");
-// app.use("/", userProfileRoutes);
-
-// const userReviewsRoutes = require("./routes/userReviews.routes");
-// app.use("/", userReviewsRoutes);
-
+const reviewsRoutes = require("./routes/reviews.routes");
+app.use("/", isAuthenticated, reviewsRoutes);
 
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes

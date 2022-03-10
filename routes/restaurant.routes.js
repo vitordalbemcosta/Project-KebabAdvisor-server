@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 const User = require("../models/User.model");
 const Restaurant = require("../models/Restaurant.model")
+const Reviews = require("../models/Reviews.model")
 
 router.post('/restaurants', (req, res, next) => {
     const { name, address, description, rating, image } = req.body;
@@ -13,11 +14,51 @@ router.post('/restaurants', (req, res, next) => {
             res.json(createRestaurant);
         }).catch((err) => next(err));
 });
+router.get("/restaurants/:restaurantId", (req, res, next) => {
+  const { restaurantId } = req.params;
 
-router.put('/restaurant'), (req, res, next) => {
-    const { name, address, description, rating, image } = req.body;
-    
-}
+  if (!mongoose.Types.ObjectId.isValid(restaurantId)) {
+    res.status(400).json({ message: "Specified Id is not valid" });
+    return;
+  }
+
+  Restaurant.findById(restaurantId)
+    .populate("tasks")
+    .then((response) => res.json(response))
+    .catch((err) => res.json(err));
+});
+
+router.put("/restaurants/:restaurantId", (req, res, next) => {
+  const { restaurantId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(restaurantId)) {
+    res.status(400).json({ message: "Specified Id is not valid" });
+    return;
+  }
+
+  Restaurant.findByIdAndUpdate(restaurantId, req.body, { new: true })
+    .then((response) => res.json(response))
+    .catch((err) => res.json(err));
+});
+
+router.delete("/restaurants/:restaurantId", (req, res, next) => {
+  const { restaurantId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(restaurantId)) {
+    res.status(400).json({ message: "Specified Id is not valid" });
+    return;
+  }
+  Restaurant.findByIdAndRemove(restaurantId)
+    .then(() =>
+      res.json({
+        message: `restaurant with ${restaurantId} was removed successfully`,
+      })
+    )
+    .catch((err) => res.json(err));
+});
+
+
+
 
 
 

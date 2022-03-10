@@ -5,11 +5,20 @@ const reviewsSchema = new Schema({
     type: String,
     required: true
   },
-    description: {
-        type: String
-    },
-    img: {
-        type: String,
-        default: "imgURL"
-    },
-});
+  description: {
+    type: String,
+    required: true
+  },
+  img: {
+    type: String,
+    default: "imgURL"
+  },
+},
+{
+  timestamps: true,
+}
+);
+
+const Reviews = model("Reviews", reviewsSchema);
+
+module.exports = Reviews;
