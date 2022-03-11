@@ -11,7 +11,7 @@ const userSchema = new Schema(
       trim: true,
       match: [/^\S+@\S+\.\S+$/, "Please use a valid email address."],
     },
-    favourite: [{ type: Schema.Types.ObjectId, ref: "Kebab" }],
+    favourite: [{ type: Schema.Types.ObjectId, ref: "Restaurant" }],
 
     passwordHash: {
       type: String,
@@ -20,6 +20,11 @@ const userSchema = new Schema(
     name: {
       type: String,
     },
+    reviews: [
+      {
+        type: Schema.Types.ObjectId, ref: "Reviews",
+      }
+    ]
   },
   {
     timestamps: true,

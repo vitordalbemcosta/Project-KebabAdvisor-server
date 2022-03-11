@@ -8,11 +8,17 @@ const Review = require("../models/Reviews.model");
 
 
 router.post('/reviews', (req, res, next) => {
-    const { name, description, img } = req.body;
+  const { user, review, rating, restaurant } = req.body;
+  
+  let createdReview
 
-    Review.create({ name, description, img })
-        .then((newReview) => {
-            return Restaurant.findByIdAndUpdate(restaurantId, { $push: { reviews: newReview._id } }, { new: true });
+    Review.create({ user, review, rating, restaurant })
+      .then((newReview) => {
+            createdReview = newReview
+            return Restaurant.findByIdAndUpdate(restaurant, { $push: { reviews: newReview._id } }, { new: true });
+        })
+      .then(() => {
+          return User.findByIdAndUpdate(user, { $push: { reviews: createdReview._id}}, {new: true})
         })
         .then((response) => res.json(response))
         .catch((err) => next(err));

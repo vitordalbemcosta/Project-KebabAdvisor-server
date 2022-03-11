@@ -9,7 +9,6 @@ const restaurantSchema = new Schema(
         address: {
             type: String,
             required: true
-
         },
         description: {
             type: String,
@@ -18,17 +17,21 @@ const restaurantSchema = new Schema(
         rating: {
             type: Number,
             required: true
-
         },
         image: {
             type: String
-        }
+        },
+        reviews: [
+            {
+             type: Schema.Types.ObjectId, ref:'Review'
+            }
+        ]
     },
     {
         timestamps: true
     }
 );
 
-const Restaurant = model('Restaurant', restaurantSchema);
+const Restaurant = model("Restaurant", restaurantSchema);
 
 module.exports = Restaurant;

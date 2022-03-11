@@ -1,17 +1,19 @@
 const { Schema, model } = require("mongoose");
 
 const reviewsSchema = new Schema({
-  name: {
+  user: {
+    type: Schema.Types.ObjectId, ref: 'User',
+    required: true
+  },
+  review: {
     type: String,
     required: true
   },
-  description: {
-    type: String,
-    required: true
+  rating: {
+    type: Number,
   },
-  img: {
-    type: String,
-    default: "imgURL"
+  restaurant: {
+    type: Schema.Types.ObjectId, ref: 'Restaurant'
   },
 },
 {
