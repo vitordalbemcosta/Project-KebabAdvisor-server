@@ -147,4 +147,16 @@ router.get("/logout", isLoggedIn, (req, res) => {
   });
 });
 
+router.get("/profile", isAuthenticated, (req, res, next) => {
+  console.log('in route', req.payload )
+  User.findById(req.payload._id)
+    .populate('reviews')
+    .then((response) => { 
+      console.log(response)
+      res.json(response);
+    })
+    .catch((err) => res.json(err));
+});
+
+
 module.exports = router;

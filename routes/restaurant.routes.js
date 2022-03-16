@@ -17,6 +17,7 @@ router.post('/restaurants', (req, res, next) => {
 
 router.get("/restaurants", (req, res, next) => {
   Restaurant.find()
+    // .populate("reviews")
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
@@ -30,8 +31,11 @@ router.get("/restaurants/:restaurantId", (req, res, next) => {
   }
 
   Restaurant.findById(restaurantId)
-    // .populate('reviews')
-    .then((response) => res.json(response))
+    .populate('reviews')
+    .then((response) => {
+      console.log(response)
+      res.json(response);
+    } )
     .catch((err) => res.json(err));
 });
 
