@@ -30,7 +30,7 @@ router.get("/restaurants/:restaurantId", (req, res, next) => {
   }
 
   Restaurant.findById(restaurantId)
-    // .populate("tasks")
+    // .populate('reviews')
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
